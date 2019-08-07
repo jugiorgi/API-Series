@@ -12,13 +12,15 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import br.com.a5.APISeries.utils.Propriedade;
 import br.com.a5.APISeries.utils.Propriedade.EnumPropriedade;
 
-public class Conexao {
+public class Buscar {
 
-	public String ConsultaSerie(String q) {
+	public String buscarSerie(String q) {
+		Propriedade propAuth = new Propriedade(EnumPropriedade.Auth);
+		Propriedade propUrl = new Propriedade(EnumPropriedade.Url);
+		
 		String resposta = "";
-		Propriedade prop = new Propriedade(EnumPropriedade.Auth);
-		String token = prop.getValor("token");
-		String url = "https://api.thetvdb.com/search/series?name=";
+		String token = propAuth.getValor("token");
+		String url = propUrl.getValor("busca");
 
 		try {
 			String url_com_parametro = encodeValue(q, url);
@@ -33,6 +35,7 @@ public class Conexao {
 			e.printStackTrace();
 		}
 
+		System.out.println("Busca URL: " + url);
 		return resposta;
 	}
 

@@ -1,6 +1,6 @@
 package br.com.a5.APISeries.bean;
 
-public class SerieBean {
+public class BuscaBean {
 
 	private String aliases;
 	private String banner;
@@ -12,7 +12,7 @@ public class SerieBean {
 	private String slug;
 	private String status;
 
-	public SerieBean() {
+	public BuscaBean() {
 	}
 
 	public String getAliases() {

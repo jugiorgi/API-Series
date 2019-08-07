@@ -6,27 +6,27 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import br.com.a5.APISeries.bean.SerieBean;
-import br.com.a5.APISeries.modal.Conexao;
+import br.com.a5.APISeries.bean.BuscaBean;
+import br.com.a5.APISeries.modal.Buscar;
 
-public class ConsultaSerieController {
+public class BuscarController {
 	
-	public List<SerieBean> organizaSerie(String q){
-		SerieBean bean;
-		Conexao conexao = new Conexao();
-		List<SerieBean> lista = new ArrayList<SerieBean>();
+	public List<BuscaBean> organizaSerie(String q){
+		List<BuscaBean> lista = new ArrayList<BuscaBean>();
+		Buscar conexao = new Buscar();
+		BuscaBean bean;
 		JSONObject json;
 		JSONArray jsonData;
 		JSONObject jsonSerie;
 		
 		try {
-			String retorno_ws = conexao.ConsultaSerie(q);
+			String retorno_ws = conexao.buscarSerie(q);
 			
 			json = new JSONObject(retorno_ws);
 			jsonData = new JSONArray(json.getString("data"));
 			
 			for(int i = 0; i < jsonData.length(); i++) {
-				bean = new SerieBean();
+				bean = new BuscaBean();
 				jsonSerie = new JSONObject(jsonData.get(i).toString());
 				
 				bean.setAliases(jsonSerie.getString("aliases"));
@@ -42,7 +42,6 @@ public class ConsultaSerieController {
 				lista.add(bean);
 			}
 			
-			System.out.println(lista.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -16,7 +16,7 @@ public class Consultar {
 		Propriedade propUrl = new Propriedade(EnumPropriedade.Url);
 
 		String token = propAuth.getValor("token");
-		String url = propUrl.getValor("consulta_serie") + id;
+		String url = propUrl.getValor("consulta") + id;
 		String resposta = "";
 
 		try {

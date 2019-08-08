@@ -1,6 +1,6 @@
 package br.com.a5.APISeries.bean;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class ConsultaBean {
 
@@ -12,7 +12,7 @@ public class ConsultaBean {
 	private String firstAired;
 	private String network;
 	private String tempo_episodio;
-	private String[] genero;
+	private List<String> genero;
 	private String descricao;
 	private String airsDayOfWeek;
 	private String airsTime;
@@ -23,9 +23,6 @@ public class ConsultaBean {
 	private String nota;
 	private String qtd_votos;
 	private String slug;
-
-	public ConsultaBean() {
-	}
 
 	public Integer getId() {
 		return id;
@@ -48,7 +45,7 @@ public class ConsultaBean {
 	}
 
 	public void setBanner(String banner) {
-		this.banner = banner;
+		this.banner = "https://www.thetvdb.com/banners/" + banner;
 	}
 
 	public String getId_serie() {
@@ -91,11 +88,11 @@ public class ConsultaBean {
 		this.tempo_episodio = tempo_episodio;
 	}
 
-	public String[] getGenero() {
+	public List<String> getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String[] genero) {
+	public void setGenero(List<String> genero) {
 		this.genero = genero;
 	}
 
@@ -181,12 +178,12 @@ public class ConsultaBean {
 
 	@Override
 	public String toString() {
-		return "ConsultaBean [id=" + id + ", nome=" + nome + ", banner=" + banner
-				+ ", id_serie=" + id_serie + ", status=" + status + ", firstAired=" + firstAired + ", network="
-				+ network + ", tempo_episodio=" + tempo_episodio + ", genero=" + Arrays.toString(genero)
-				+ ", descricao=" + descricao + ", airsDayOfWeek=" + airsDayOfWeek + ", airsTime=" + airsTime
-				+ ", rating=" + rating + ", imdbId=" + imdbId + ", zap2itId=" + zap2itId + ", data_adicao="
-				+ data_adicao + ", nota=" + nota + ", qtd_votos=" + qtd_votos + ", slug=" + slug + "]";
+		return "ConsultaBean [id=" + id + ", nome=" + nome + ", banner=" + banner + ", id_serie=" + id_serie
+				+ ", status=" + status + ", firstAired=" + firstAired + ", network=" + network + ", tempo_episodio="
+				+ tempo_episodio + ", genero=" + genero + ", descricao=" + descricao + ", airsDayOfWeek="
+				+ airsDayOfWeek + ", airsTime=" + airsTime + ", rating=" + rating + ", imdbId=" + imdbId + ", zap2itId="
+				+ zap2itId + ", data_adicao=" + data_adicao + ", nota=" + nota + ", qtd_votos=" + qtd_votos + ", slug="
+				+ slug + "]";
 	}
 
 }

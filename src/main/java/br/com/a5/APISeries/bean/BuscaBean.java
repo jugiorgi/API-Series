@@ -24,11 +24,11 @@ public class BuscaBean {
 	}
 
 	public String getBanner() {
-		return banner;
+		return   banner;
 	}
 
 	public void setBanner(String banner) {
-		this.banner = banner;
+		this.banner = "https://www.thetvdb.com/banners/" + banner;
 	}
 
 	public String getFirstAired() {

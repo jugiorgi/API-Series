@@ -1,8 +1,5 @@
 package br.com.a5.APISeries.modal;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -12,43 +9,31 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import br.com.a5.APISeries.utils.Propriedade;
 import br.com.a5.APISeries.utils.Propriedade.EnumPropriedade;
 
-public class Buscar {
+public class Atores {
 
-	public String buscarSerie(String q) {
+	public String consultarAtores(Integer id) {
 		Propriedade propAuth = new Propriedade(EnumPropriedade.Auth);
 		Propriedade propUrl = new Propriedade(EnumPropriedade.Url);
-		
+
 		String resposta = "";
 		String token = propAuth.getValor("token");
-		String url = propUrl.getValor("busca");
+		String url = propUrl.getValor("ator").replace("id_serie", id.toString());
 
 		try {
-			String url_com_parametro = encodeValue(q, url);
-			HttpClient httpClient = HttpClientBuilder.create().build();
-			HttpGet get = new HttpGet(url_com_parametro);
+
+			HttpClient http = HttpClientBuilder.create().build();
+			HttpGet get = new HttpGet(url);
 			get.setHeader("Authorization", "Bearer " + token);
 			get.setHeader("Accept-Language", "pt");
-			HttpResponse response = httpClient.execute(get);
+			HttpResponse response = http.execute(get);
 			resposta = new BasicResponseHandler().handleResponse(response);
 
-			System.out.println("Busca URL: " + url_com_parametro);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		System.out.println("Atores URL:" + url);
 		return resposta;
 	}
 
-	private static String encodeValue(String p, String url) {
-		String urlEditada = "";
-		
-		try {
-			
-			urlEditada = url + URLEncoder.encode(p, StandardCharsets.UTF_8.toString());
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return urlEditada;
-	}
 }

@@ -8,15 +8,21 @@ import br.com.a5.APISeries.controller.BuscarController;
 import br.com.a5.APISeries.controller.ConsultaController;
 
 public class App {
-	
-    public static void main( String[] args ){
-    	
-    	BuscarController buscac = new BuscarController();
-    	List<BuscaBean> lista = new ArrayList<BuscaBean>();
-    	lista = buscac.organizaSerie("The 100");
-    	
-    	
+
+	public static void main(String[] args) {
+
+		BuscarController buscac = new BuscarController();
+		List<BuscaBean> lista = new ArrayList<BuscaBean>();
+		lista = buscac.organizaSerie("The 100");
+
     	ConsultaController consultar = new ConsultaController();
-    	System.out.println(consultar.consulta(lista.get(0).getId()));
-    }
+    	System.out.println("ID: " + consultar.consulta(lista.get(0).getId()).getId());
+		
+//		AtoresController a = new AtoresController();
+//		System.out.println(a.organizaAtores(lista.get(0).getId()));
+		
+//		List<EpisodiosBean> ep = new ArrayList<EpisodiosBean>();
+//		EpisodioController e = new EpisodioController();
+//		ep = e.organizarEpisodio(lista.get(0).getId());
+	}
 }

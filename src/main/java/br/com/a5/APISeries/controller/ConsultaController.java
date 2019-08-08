@@ -1,5 +1,8 @@
 package br.com.a5.APISeries.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,20 +10,20 @@ import br.com.a5.APISeries.bean.ConsultaBean;
 import br.com.a5.APISeries.modal.Consultar;
 
 public class ConsultaController {
-	
-	public ConsultaBean consulta(Integer id){
-		String[] generos = {};
+
+	public ConsultaBean consulta(Integer id) {
+		List<String> generos = new ArrayList<String>();
 		Consultar conexao = new Consultar();
 		ConsultaBean bean = new ConsultaBean();
 		JSONObject json;
 		JSONArray genero;
-		
+
 		try {
 			String retorno_ws = conexao.consultarSerie(id);
-			
+
 			json = new JSONObject(retorno_ws);
 			json = new JSONObject(json.get("data").toString());
-			
+
 			bean.setId(json.getInt("id"));
 			bean.setNome(json.getString("seriesName"));
 			bean.setBanner(json.getString("banner"));
@@ -30,11 +33,10 @@ public class ConsultaController {
 			bean.setNetwork(json.getString("network"));
 			bean.setTempo_episodio(json.getString("runtime"));
 			genero = new JSONArray(json.getString("genre"));
-			
-//			for(int i = 0; i < genero.length(); i++) {
-//				generos[i] = (String) genero.get(i);
-//			}
-			
+			for (int i = 0; i < genero.length(); i++) {
+				generos.add(genero.get(i).toString());
+			}
+			bean.setGenero(generos);
 			bean.setDescricao(json.getString("overview"));
 			bean.setAirsDayOfWeek(json.getString("airsDayOfWeek"));
 			bean.setAirsTime(json.getString("airsTime"));
@@ -45,11 +47,11 @@ public class ConsultaController {
 			bean.setNota(json.getString("siteRating"));
 			bean.setQtd_votos(json.getString("siteRatingCount"));
 			bean.setSlug(json.getString("slug"));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return bean;
 	}
 }
